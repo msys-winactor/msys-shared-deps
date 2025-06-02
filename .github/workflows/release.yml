@@ -12,26 +12,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # タグの取得に必要
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12.4"
 
-      - name: Install Poetry (latest stable)
-        run: pip install poetry==1.8.2
+      - name: Install pip and pip-tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-tools
 
       - name: Extract version from tag
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Update pyproject.toml version
-        run: |
-          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
-
-      - name: Export requirements.txt
-        run: poetry export --without-hashes -f requirements.txt -o requirements.txt
+      - name: Generate requirements.txt from pyproject.toml
+        run: pip-compile --resolver=backtracking --output-file=requirements.txt pyproject.toml
 
       - name: Install dependencies to libs/
         run: pip install -r requirements.txt -t libs
