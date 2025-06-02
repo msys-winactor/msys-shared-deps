@@ -1,6 +1,6 @@
 [project]
 name = "msys-shared-deps"
-version = "0.1.8"
+version = "0.1.9"
 description = "Shared Python dependencies for MSYS internal use"
 authors = [
     {name = "Your Name",email = "you@example.com"}
