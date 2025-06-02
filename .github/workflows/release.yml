@@ -18,8 +18,8 @@ jobs:
         with:
           python-version: "3.12.4"
 
-      - name: Install Poetry
-        run: pip install poetry
+      - name: Install Poetry (latest stable)
+        run: pip install poetry==1.8.2
 
       - name: Extract version from tag
         run: |
@@ -39,7 +39,7 @@ jobs:
       - name: Create ZIP of libs only
         run: |
           ZIP_NAME="msys-shared-deps_libs_v$VERSION.zip"
-          zip -r $ZIP_NAME libs
+          zip -r $ZIP_NAME libs -x "*.pyc" -x "__pycache__/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
 
       - name: Upload ZIP to GitHub Release
