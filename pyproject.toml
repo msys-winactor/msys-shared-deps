@@ -3,16 +3,15 @@ name = "msys-shared-deps"
 version = "0.1.10"
 description = "Shared Python dependencies for MSYS internal use"
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    { name = "Your Name", email = "you@example.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "requests (>=2.32.3,<3.0.0)",
-    "cryptography (>=45.0.3,<46.0.0)"
+    "requests>=2.32.3,<3.0.0",
+    "cryptography>=45.0.3,<46.0.0"
 ]
 
-
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
