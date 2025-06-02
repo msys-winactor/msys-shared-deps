@@ -1,0 +1,50 @@
+name: Build and Release libs-only ZIP
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.4"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Extract version from tag
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Update pyproject.toml version
+        run: |
+          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
+
+      - name: Export requirements.txt
+        run: poetry export --without-hashes -f requirements.txt -o requirements.txt
+
+      - name: Install dependencies to libs/
+        run: pip install -r requirements.txt -t libs
+
+      - name: Create ZIP of libs only
+        run: |
+          ZIP_NAME="msys-shared-deps_libs_v$VERSION.zip"
+          zip -r $ZIP_NAME libs
+          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
+
+      - name: Upload ZIP to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
