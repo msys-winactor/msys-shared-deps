@@ -10,7 +10,8 @@ requires-python = ">=3.12"
 dependencies = [
     "requests>=2.32.3,<3.0.0",
     "cryptography>=45.0.3,<46.0.0",
-    "openpyxl (>=3.1.5,<4.0.0)"
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "box-sdk-gen (>=1.14.0,<2.0.0)"
 ]
 
 [build-system]
