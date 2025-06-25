@@ -1,6 +1,6 @@
 [project]
 name = "msys-shared-deps"
-version = "0.1.14"
+version = "0.1.15"
 description = "Shared Python dependencies for MSYS internal use"
 authors = [
     { name = "Your Name", email = "you@example.com" }
@@ -20,7 +20,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "msys-shared-deps"
-version = "0.1.14"
+version = "0.1.15"
 description = "Shared Python dependencies for MSYS internal use"
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
