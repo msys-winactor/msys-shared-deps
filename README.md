@@ -83,22 +83,42 @@ poetry run python release.py --level major
 
 ### 4. ダウンロードと利用
 
-リリースされた ZIP ファイルは以下から利用できます：
+リリースされた ZIP ファイルは以下の手順で利用します：
 
-- GitHub の Releases ページからダウンロード
-- ZIP ファイルを展開すると `libs/` フォルダに全依存パッケージが含まれています
-- Python のパスに `libs/` フォルダを追加することで利用可能
+1. **ダウンロード**: GitHub の Releases ページから最新の ZIP ファイルをダウンロード
+2. **展開**: ZIP ファイルを `C:\Users\Public\msys-winactor\libs` に展開
+3. **Python パス設定**: スクリプトで libs フォルダをパスに追加
+
+#### 利用例
 
 ```python
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'libs'))
+
+# libsフォルダをPythonパスに追加
+libs_path = r"C:\Users\Public\msys-winactor\libs"
+if libs_path not in sys.path:
+    sys.path.insert(0, libs_path)
 
 # 依存パッケージが利用可能
 import requests
 import cryptography
 import openpyxl
 import boxsdk
+
+# 使用例
+response = requests.get("https://api.example.com")
+print(response.status_code)
+```
+
+#### ディレクトリ構成
+
+展開後のディレクトリ構成：
+
+```
+C:\Users\Public\msys-winactor\
+└── libs\
+    └── (依存パッケージ)
 ```
 
 ## ライセンス
