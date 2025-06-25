@@ -1,6 +1,6 @@
 [project]
 name = "msys-shared-deps"
-version = "0.1.16"
+version = "0.1.17"
 description = "Shared Python dependencies for MSYS internal use"
 authors = [
     { name = "Your Name", email = "you@example.com" }
@@ -12,7 +12,8 @@ dependencies = [
     "cryptography>=45.0.3,<46.0.0",
     "openpyxl (>=3.1.5,<4.0.0)",
     "box-sdk-gen (>=1.14.0,<2.0.0)",
-    "openai (>=1.91.0,<2.0.0)"
+    "openai (>=1.91.0,<2.0.0)",
+    "pywin32 (>=310,<311)"
 ]
 
 [build-system]
@@ -21,7 +22,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "msys-shared-deps"
-version = "0.1.16"
+version = "0.1.17"
 description = "Shared Python dependencies for MSYS internal use"
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
