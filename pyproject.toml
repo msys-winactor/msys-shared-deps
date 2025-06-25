@@ -35,6 +35,3 @@ box-sdk-gen = "^1.14.0"
 
 [tool.poetry.group.dev.dependencies]
 # 開発用依存関係はここに追加
-
-[tool.poetry.scripts]
-release = "release:main"

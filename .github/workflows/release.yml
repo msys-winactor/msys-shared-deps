@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
@@ -27,8 +27,8 @@ jobs:
 
       - name: Extract version from tag
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          $VERSION = $env:GITHUB_REF -replace 'refs/tags/v', ''
+          echo "VERSION=$VERSION" >> $env:GITHUB_ENV
 
       - name: Generate requirements.txt from pyproject.toml
         run: pip-compile --resolver=backtracking --output-file=requirements.txt pyproject.toml
@@ -38,9 +38,9 @@ jobs:
 
       - name: Create ZIP of libs only
         run: |
-          ZIP_NAME="msys-shared-deps_libs_v$VERSION.zip"
-          zip -r $ZIP_NAME libs -x "*.pyc" -x "__pycache__/*"
-          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
+          $ZIP_NAME="msys-shared-deps_libs_v$env:VERSION.zip"
+          Compress-Archive -Path libs\* -DestinationPath $ZIP_NAME -Force
+          echo "ZIP_NAME=$ZIP_NAME" >> $env:GITHUB_ENV
 
       - name: Upload ZIP to GitHub Release
         uses: softprops/action-gh-release@v2

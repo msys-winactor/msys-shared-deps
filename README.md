@@ -52,13 +52,13 @@ Poetry コマンドを実行すると、`pyproject.toml` と `poetry.lock` が�
 
 ```sh
 # パッチバージョンアップ (例: 0.1.14 -> 0.1.15)
-poetry run release
+poetry run python release.py
 
 # マイナーバージョンアップ (例: 0.1.14 -> 0.2.0)
-poetry run release --level minor
+poetry run python release.py --level minor
 
 # メジャーバージョンアップ (例: 0.1.14 -> 1.0.0)
-poetry run release --level major
+poetry run python release.py --level major
 ```
 
 #### スクリプトの実行内容
